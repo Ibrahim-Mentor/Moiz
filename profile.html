@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings - Moiz's Store</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #fff; --secondary-color: #f4f6f8; --accent-color: #007bff; --text-color: #343a40;
+            --heading-color: #212529; --border-color: #dee2e6; --card-shadow: 0 4px 15px rgba(0,0,0,.07);
+        }
+        * { box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--secondary-color); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        .header { background-color: var(--primary-color); padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+        .header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--heading-color); text-decoration: none; }
+        .main-nav a { font-weight: 600; color: var(--text-color); text-decoration: none; margin: 0 15px; }
+        .header-icons a { margin-left: 20px; color: var(--heading-color); text-decoration: none; font-size: 1.5rem; }
+        .footer { background-color: #2c3e50; color: #bdc3c7; padding: 40px 0; margin-top: auto; }
+        .footer .container { text-align: center; }
+        
+        /* --- PROFILE PAGE STYLES --- */
+        .main-content { display: flex; justify-content: center; align-items: center; padding: 50px 0; flex-grow: 1; }
+        .profile-container { background-color: var(--primary-color); padding: 40px; border-radius: 10px; box-shadow: var(--card-shadow); width: 100%; max-width: 500px; }
+        .profile-container h2 { text-align: center; margin-top: 0; margin-bottom: 30px; color: var(--heading-color); }
+        .profile-pic-wrapper { text-align: center; margin-bottom: 30px; }
+        #profile-pic-preview { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid var(--border-color); }
+        #profile-pic-input { display: none; }
+        .change-pic-label { display: inline-block; margin-top: 15px; background-color: #6c757d; color: white; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: 600; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem; }
+        .form-btn { width: 100%; padding: 15px; background-color: var(--accent-color); color: #fff; border: none; border-radius: 5px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color .3s; }
+        .form-btn:hover { background-color: #0056b3; }
+        #logoutBtn { width: 100%; padding: 15px; background-color: #dc3545; color: #fff; border: none; border-radius: 5px; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 15px; }
+        #form-message { text-align: center; margin-top: 15px; font-weight: 600; color: #28a745; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">Moiz's Store</a>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+            </nav>
+            <div class="header-icons" id="headerIcons">
+                </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="profile-container">
+            <h2>Profile Settings</h2>
+            <div class="profile-pic-wrapper">
+                <img src="https://via.placeholder.com/150" alt="Profile Picture" id="profile-pic-preview">
+                <input type="file" id="profile-pic-input" accept="image/*">
+                <label for="profile-pic-input" class="change-pic-label">Change Picture</label>
+            </div>
+            <form id="profileForm">
+                <div class="input-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <button type="submit" class="form-btn">Save Changes</button>
+            </form>
+            <button id="logoutBtn">Logout</button>
+            <p id="form-message"></p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container"><p>&copy; 2025 Moiz's Store. All Rights Reserved.</p></div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+            // Auth Guard: If no user is logged in, redirect to login page
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const nameInput = document.getElementById('name');
+            const profilePicPreview = document.getElementById('profile-pic-preview');
+            const profilePicInput = document.getElementById('profile-pic-input');
+            const profileForm = document.getElementById('profileForm');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const messageEl = document.getElementById('form-message');
+            const headerIcons = document.getElementById('headerIcons');
+
+            // --- Populate page with current user data ---
+            nameInput.value = currentUser.name;
+            profilePicPreview.src = currentUser.profileImg || 'https://via.placeholder.com/150/007bff/FFFFFF?text=' + currentUser.name.charAt(0);
+            
+            // --- Dynamically update header icons ---
+            headerIcons.innerHTML = `
+                <a href="profile.html" title="My Account">&#128100;</a>
+                <a href="cart.html" title="Shopping Cart">&#128722;</a>
+            `;
+
+            // --- Event Listener for image preview ---
+            let newProfileImgSrc = currentUser.profileImg;
+            profilePicInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        newProfileImgSrc = event.target.result;
+                        profilePicPreview.src = newProfileImgSrc;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // --- Event Listener for saving changes ---
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const newName = nameInput.value.trim();
+                
+                if (!newName) {
+                    alert('Name cannot be empty.');
+                    return;
+                }
+                
+                // Update the currentUser object
+                currentUser.name = newName;
+                currentUser.profileImg = newProfileImgSrc;
+                
+                // Save updated currentUser back to localStorage
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+                // IMPORTANT: Also update the master users database
+                let users = JSON.parse(localStorage.getItem('usersDB')) || [];
+                const userIndex = users.findIndex(u => u.email === currentUser.email);
+                if (userIndex !== -1) {
+                    users[userIndex] = currentUser;
+                    localStorage.setItem('usersDB', JSON.stringify(users));
+                }
+
+                messageEl.textContent = 'Profile updated successfully!';
+                setTimeout(() => messageEl.textContent = '', 2000);
+            });
+
+            // --- Event Listener for logout ---
+            logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
