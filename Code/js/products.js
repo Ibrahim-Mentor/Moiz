@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- MASTER PRODUCT DATA (Using your local images) ---
     const products = [
         // Watches
-        { id: 1, name: "Classic Chronograph", price: 12500, image: "img/watch/watch1.png", rating: 5, category: 'Watches' },
+        { id: 1, name: "Classic Chronograph", price: 12500, image: "E:\Student Work\Moiz\old\img\watch/watch1.png", rating: 5, category: 'Watches' },
         { id: 2, name: "Steel Dive Watch", price: 15999, image: "img/watch/watch2.png", rating: 5, category: 'Watches' },
         { id: 3, name: "Minimalist Leather", price: 8999, image: "img/watch/watch3.png", rating: 4, category: 'Watches' },
         { id: 4, name: "Digital Sport Watch", price: 7500, image: "img/watch/watch4.png", rating: 4, category: 'Watches' },
@@ -13,16 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 7, name: "Modern Smartwatch", price: 22000, image: "img/watch/watch7.png", rating: 5, category: 'Watches' },
         
         // Bracelets
-        { id: 8, name: "Silver Link Bracelet", price: 3500, image: "img/bracelet/bracelet1.jpg", rating: 4, category: 'Bracelets' },
-        { id: 9, name: "Woven Leather Band", price: 1800, image: "img/bracelet/bracelet2.jpg", rating: 5, category: 'Bracelets' },
-        { id: 10, name: "Beaded Stone Bracelet", price: 2100, image: "img/bracelet/bracelet3.jpg", rating: 4, category: 'Bracelets' },
-        { id: 11, name: "Engraved Steel Cuff", price: 4200, image: "img/bracelet/bracelet4.jpg", rating: 5, category: 'Bracelets' },
+        { id: 8, name: "Silver Link Bracelet", price: 3500, image: "img/bracelet/bracelet1.png", rating: 4, category: 'Bracelets' },
+        { id: 9, name: "Woven Leather Band", price: 1800, image: "img/bracelet/bracelet2.png", rating: 5, category: 'Bracelets' },
+        { id: 10, name: "Beaded Stone Bracelet", price: 2100, image: "img/bracelet/bracelet3.png", rating: 4, category: 'Bracelets' },
+        { id: 11, name: "Engraved Steel Cuff", price: 4200, image: "img/bracelet/bracelet4.png", rating: 5, category: 'Bracelets' },
 
         // Wallets (keeping them here for filtering)
-        { id: 12, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet1.png", rating: 5, category: 'Wallets' },
-        { id: 13, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet2.png", rating: 4, category: 'Wallets' },
-        { id: 12, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet3.png", rating: 5, category: 'Wallets' },
-        { id: 13, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet4.png", rating: 4, category: 'Wallets' },
+        { id: 12, name: "Leather Bifold Wallet", price: 2200, image: "https://source.unsplash.com/300x220/?wallet,leather", rating: 5, category: 'Wallets' },
+        { id: 13, name: "Traveler's Wallet", price: 2800, image: "https://source.unsplash.com/300x220/?wallet,travel", rating: 4, category: 'Wallets' },
     ];
 
     // --- (The rest of this script is the standard site-wide logic) ---
