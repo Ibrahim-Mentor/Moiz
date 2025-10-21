@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="logo/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="js/data/products.js"></script>
     <script src="js/script.js" defer></script>
 </head>
 <body>
@@ -65,31 +66,20 @@
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-        // Wait for the global products array to be available from script.js
-        const checkProducts = setInterval(() => {
-            if (window.products) {
-                clearInterval(checkProducts);
-                renderProduct();
-            }
-        }, 100);
-
         const productDetailsWrapper = document.getElementById('product-details-wrapper');
         
-        // --- Function to get product ID from URL ---
         const getProductId = () => {
             const urlParams = new URLSearchParams(window.location.search);
             return parseInt(urlParams.get('id'));
         };
 
-        // --- Function to render product details ---
         const renderProduct = () => {
             const productId = getProductId();
-            const product = window.products.find(p => p.id === productId);
+            const allProducts = [masterProduct, ...products.watches, ...products.bracelets, ...products.necklaces];
+            const product = allProducts.find(p => p.id === productId);
 
             if (product) {
-                document.title = `${product.name} - MN Store`; // Update page title
-                
-                let starsHTML = Array(5).fill(0).map((_, i) => i < product.rating ? '★' : '☆').join('');
+                document.title = `${product.name} - MN Store`; 
 
                 productDetailsWrapper.innerHTML = `
                     <div class="product-page-layout">
@@ -98,7 +88,6 @@
                         </div>
                         <div class="product-details-content">
                             <h1>${product.name}</h1>
-                            <div class="star-rating">${starsHTML}</div>
                             <p class="product-price">PKR ${product.price.toLocaleString()}</p>
                             <p class="product-description">${product.description}</p>
                             <button class="add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
@@ -106,7 +95,6 @@
                     </div>
                 `;
                 
-                // Add event listener to the new button
                 const addToCartBtn = productDetailsWrapper.querySelector('.add-to-cart-btn');
                 addToCartBtn.addEventListener('click', (e) => {
                     const productId = parseInt(e.currentTarget.dataset.id, 10);
@@ -130,7 +118,7 @@
             }
         };
         
-        // Initial render is now called inside the interval checker
+        renderProduct();
     });
     </script>
 </body>

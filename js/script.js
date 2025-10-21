@@ -172,7 +172,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const displayCategories = (activeCat) => {
         if (!categoryFilters) return;
         const categories = ['All', ...Object.keys(products)];
-        categoryFilters.innerHTML = categories.map(cat => `<button class="category-btn ${cat === activeCat ? 'active' : ''}" data-category="${cat}">${cat}</button>`).join('');
+        const categoryMap = {
+            'watches': 'Watches',
+            'bracelets': 'Bracelets',
+            'necklaces': 'Necklaces'
+        };
+        categoryFilters.innerHTML = categories.map(cat => `<button class="category-btn ${cat === activeCat ? 'active' : ''}" data-category="${cat}">${categoryMap[cat] || cat}</button>`).join('');
     };
 
     // --- SEARCH LOGIC ---
@@ -211,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             productsToDisplay = allProducts.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
             if (pageTitle) pageTitle.textContent = `Search Results for "${searchTerm}"`;
         } else if (initialCategory !== 'All') {
-            productsToDisplay = allProducts.filter(p => p.category === initialCategory);
+            productsToDisplay = products[initialCategory.toLowerCase()] || [];
         }
 
         if (productGrid) {
