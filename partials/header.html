@@ -1,13 +1,33 @@
-<header class="header">
-  <div class="container">
-    <a href="index.html" class="logo">
-      <img src="/img/logo/logo.png" alt="MN Store" style="height:48px; display:inline-block;">
-    </a>
-    <nav class="main-nav">
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-    </nav>
-    <div class="search-bar"><input type="text" id="searchInput" placeholder="Search products..."></div>
-    <div class="header-icons" id="headerIcons"></div>
-  </div>
+<header class="site-header">
+    <div class="container header-container">
+        <a href="index.html" class="logo">
+            <img src="img/logo/logo.png" alt="MN Store" width="120" height="40">
+        </a>
+        
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="products.html" class="nav-link">Products</a>
+            <a href="about.html" class="nav-link">About</a>
+        </nav>
+
+        <div class="header-controls">
+            <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+            <a href="cart.html" class="header-icon" aria-label="Cart">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M9 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm7 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm-7-13h10l-1.5 7h-7l-1.5-7z"></path>
+                </svg>
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
+            <a href="account.html" class="header-icon" aria-label="Account">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </a>
+        </div>
+    </div>
 </header>
