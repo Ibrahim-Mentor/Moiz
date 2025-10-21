@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addToCart = (productId) => { 
-        const allProducts = [masterProduct, ...products.watches, ...products.bracelets, ...products.necklaces];
+        const allProducts = [masterProduct, ...products.watches, ...products.bracelets, ...products.necklaces, ...products.wallets];
         const product = allProducts.find(p => p.id === productId); 
         if (!product) return; 
         const existingItem = cart.find(item => item.id === productId); 
@@ -126,7 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const collectionProducts = [
             products.watches[0],
             products.bracelets[0],
-            products.necklaces[0]
+            products.necklaces[0],
+            products.wallets[0]
         ];
         collectionProducts.forEach(product => {
             const card = document.createElement('div');
@@ -175,7 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const categoryMap = {
             'watches': 'Watches',
             'bracelets': 'Bracelets',
-            'necklaces': 'Necklaces'
+            'necklaces': 'Necklaces',
+            'wallets': 'Wallets'
         };
         categoryFilters.innerHTML = categories.map(cat => `<button class="category-btn ${cat === activeCat ? 'active' : ''}" data-category="${cat}">${categoryMap[cat] || cat}</button>`).join('');
     };
@@ -209,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pageTitle.textContent = `${initialCategory}`;
         }
         
-        const allProducts = (typeof products !== 'undefined') ? [...(products.watches || []), ...(products.bracelets || []), ...(products.necklaces || [])] : [];
+        const allProducts = (typeof products !== 'undefined') ? [...(products.watches || []), ...(products.bracelets || []), ...(products.necklaces || []), ...(products.wallets || [])] : [];
 
         let productsToDisplay = allProducts;
         if (searchTerm) {
