@@ -46,27 +46,32 @@
         .then(r=>{ if(!r.ok) throw new Error('Not found'); return r.text(); })
         .then(html=> {
           const el = document.getElementById('site-'+name+'-placeholder');
-          if(el) el.innerHTML = html;
+          if(el) {
+            el.innerHTML = html;
+            // After header is loaded, initialize its dynamic parts
+            if (name === 'header') {
+                // The main script.js will handle setupHeader, but we need to wait for it to be loaded
+                document.addEventListener('headerLoaded', () => {
+                    if(window.setupHeader) window.setupHeader();
+                    if(window.setupSearch) window.setupSearch();
+                    if(window.updateCartUI) window.updateCartUI();
+                });
+                const event = new Event('headerLoaded');
+                document.dispatchEvent(event);
+            }
+          }
         })
         .catch(err=> console.warn('Could not load partial:', name, err));
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-        // This product data should be in one central file (like products.js)
-        // For now, it's updated here to match your store's items.
-        const products = [
-            // Watches
-            { id: 1, name: "Classic Chronograph Watch", price: 12500, image: "img/watch/watch1.png", rating: 5, category: "Watches", description: "A sophisticated timepiece with a timeless design, featuring a stainless steel case and a genuine leather strap. Perfect for both formal and casual occasions." },
-            { id: 2, name: "Minimalist Black Watch", price: 8999, image: "img/watch/watch2.png", rating: 4, category: "Watches", description: "Sleek and modern, this watch features a clean black dial and a comfortable mesh strap. Its minimalist design makes a subtle yet strong statement." },
-            { id: 3, name: "Digital Sports Watch", price: 7500, image: "img/watch/watch3.png", rating: 5, category: "Watches", description: "Built for the active individual, this durable sports watch includes a stopwatch, alarm, and is water-resistant up to 50 meters." },
-            // Bracelets
-            { id: 4, name: "Braided Leather Bracelet", price: 250, image: "img/bracelet/bracelet1.JPG", rating: 4.5, category: "Bracelets", description: "Handcrafted from genuine leather with a secure stainless steel clasp. This braided bracelet adds a touch of rugged elegance to any outfit." },
-            { id: 5, name: "Beaded Stone Bracelet", price: 220, image: "img/bracelet/bracelet2.JPG", rating: 4, category: "Bracelets", description: "Featuring natural stone beads, this bracelet is known for its calming properties. An elastic band ensures a comfortable fit for any wrist size." },
-            { id: 6, name: "Silver Chain Bracelet", price: 320, image: "img/bracelet/bracelet3.JPG", rating: 5, category: "Bracelets", description: "A classic silver chain bracelet that offers a sleek and polished look. Made from high-quality stainless steel, it's perfect for everyday wear." },
-            // Wallets
-            { id: 7, name: "Slim Bifold Wallet", price: 1800, image: "img/wallet/wallet1.png", rating: 5, category: "Wallets", description: "Crafted from premium leather, this slim bifold wallet is designed to hold your essentials without the bulk. Features multiple card slots and a cash compartment." },
-            { id: 8, name: "Leather Card Holder", price: 1500, image: "img/wallet/wallet2.png", rating: 4, category: "Wallets", description: "For the ultimate minimalist, this sleek card holder provides quick access to your most-used cards. Made from soft, durable leather." }
-        ];
+        // Wait for the global products array to be available from script.js
+        const checkProducts = setInterval(() => {
+            if (window.products) {
+                clearInterval(checkProducts);
+                renderProduct();
+            }
+        }, 100);
 
         const productDetailsWrapper = document.getElementById('product-details-wrapper');
         
@@ -79,7 +84,7 @@
         // --- Function to render product details ---
         const renderProduct = () => {
             const productId = getProductId();
-            const product = products.find(p => p.id === productId);
+            const product = window.products.find(p => p.id === productId);
 
             if (product) {
                 document.title = `${product.name} - MN Store`; // Update page title
@@ -104,12 +109,13 @@
                 // Add event listener to the new button
                 const addToCartBtn = productDetailsWrapper.querySelector('.add-to-cart-btn');
                 addToCartBtn.addEventListener('click', (e) => {
-                    // This function is likely in your global script.js
-                    // It needs the product ID and the button element.
-                    if(window.handleAddToCart) {
-                        window.handleAddToCart(product.id, e.currentTarget);
+                    const productId = parseInt(e.currentTarget.dataset.id, 10);
+                    if(window.addToCart) {
+                        window.addToCart(productId);
+                        e.currentTarget.textContent = 'Added!';
+                        setTimeout(() => e.currentTarget.textContent = 'Add to Cart', 2000);
                     } else {
-                        console.error('handleAddToCart function not found.');
+                        console.error('addToCart function not found.');
                     }
                 });
 
@@ -124,8 +130,7 @@
             }
         };
         
-        // --- Initial render on page load ---
-        renderProduct();
+        // Initial render is now called inside the interval checker
     });
     </script>
 </body>

@@ -53,7 +53,7 @@
             <div class="" id="productGrid"></div>
             
             <div class="view-all-container">
-                <a href="product.html" class="view-all-btn">View All Products</a>
+                <a href="products.html" class="view-all-btn">View All Products</a>
             </div>
         </section>
     </main>
@@ -84,7 +84,15 @@
         .then(r=>{ if(!r.ok) throw new Error('Not found'); return r.text(); })
         .then(html=> {
           const el = document.getElementById('site-'+name+'-placeholder');
-          if(el) el.innerHTML = html;
+          if(el) {
+            el.innerHTML = html;
+            // After header is loaded, initialize its dynamic parts
+            if (name === 'header') {
+                // The main script.js will handle everything else, but we need to signal when the header is ready
+                const event = new Event('headerLoaded');
+                document.dispatchEvent(event);
+            }
+          }
         })
         .catch(err=> {
           console.warn('Could not load partial:', name, err);
