@@ -586,3 +586,66 @@ main {
         font-size: 1rem;
     }
 }
+
+/* --- Signup Form Specific Styles --- */
+.form-container { 
+    max-width: 400px; 
+    margin: 0 auto; 
+    padding: 40px 20px; 
+    border-radius: 10px; 
+    box-shadow: var(--card-shadow); 
+    background-color: var(--primary-color); 
+}
+
+.form-container h2 { 
+    font-size: 2rem; 
+    margin-bottom: 25px; 
+    color: var(--heading-color); 
+}
+
+.input-group { 
+    margin-bottom: 15px; 
+}
+
+.input-group label { 
+    font-weight: 500; 
+    margin-bottom: 8px; 
+}
+
+.input-group input { 
+    padding: 10px; 
+    font-size: 0.9rem; 
+}
+
+.form-btn { 
+    padding: 12px; 
+    font-size: 1rem; 
+    font-weight: 500; 
+    background-color: var(--accent-color); 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color .3s, transform .2s; 
+}
+.form-btn:hover { 
+    background-color: #0056b3; 
+    transform: translateY(-2px); 
+}
+
+.form-switch-link { 
+    margin-top: 15px; 
+    font-size: 0.9rem; 
+}
+.form-switch-link a { 
+    color: var(--accent-color); 
+    text-decoration: none; 
+    font-weight: 500; 
+}
+
+.form-message { 
+    margin-top: 10px; 
+    font-weight: 500; 
+    min-height: 1.2em;
+}
+.form-message.success { color: #28a745; }
+.form-message.error { color: #dc3545; }
