@@ -1,19 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- MASTER PRODUCT DATA ---
-    window.products = [
-        // Watches
-        { id: 1, name: "Classic Chronograph Watch", price: 12500, image: "img/watch/watch1.png", rating: 5, category: "Watches", description: "A sophisticated timepiece with a timeless design, featuring a stainless steel case and a genuine leather strap. Perfect for both formal and casual occasions." },
-        { id: 2, name: "Minimalist Black Watch", price: 8999, image: "img/watch/watch2.png", rating: 4, category: "Watches", description: "Sleek and modern, this watch features a clean black dial and a comfortable mesh strap. Its minimalist design makes a subtle yet strong statement." },
-        { id: 3, name: "Digital Sports Watch", price: 7500, image: "img/watch/watch3.png", rating: 5, category: "Watches", description: "Built for the active individual, this durable sports watch includes a stopwatch, alarm, and is water-resistant up to 50 meters." },
-        // Bracelets
-        { id: 4, name: "Braided Leather Bracelet", price: 2500, image: "img/bracelet/bracelet1.JPG", rating: 4.5, category: "Bracelets", description: "Handcrafted from genuine leather with a secure stainless steel clasp. This braided bracelet adds a touch of rugged elegance to any outfit." },
-        { id: 5, name: "Beaded Stone Bracelet", price: 2200, image: "img/bracelet/bracelet2.JPG", rating: 4, category: "Bracelets", description: "Featuring natural stone beads, this bracelet is known for its calming properties. An elastic band ensures a comfortable fit for any wrist size." },
-        { id: 6, name: "Silver Chain Bracelet", price: 3200, image: "img/bracelet/bracelet3.JPG", rating: 5, category: "Bracelets", description: "A classic silver chain bracelet that offers a sleek and polished look. Made from high-quality stainless steel, it's perfect for everyday wear." },
-        // Wallets
-        { id: 7, name: "Slim Bifold Wallet", price: 1800, image: "img/wallet/wallet1.png", rating: 5, category: "Wallets", description: "Crafted from premium leather, this slim bifold wallet is designed to hold your essentials without the bulk. Features multiple card slots and a cash compartment." },
-        { id: 8, name: "Leather Card Holder", price: 1500, image: "img/wallet/wallet2.png", rating: 4, category: "Wallets", description: "For the ultimate minimalist, this sleek card holder provides quick access to your most-used cards. Made from soft, durable leather." }
-    ];
-
     // --- DOM ELEMENTS ---
     const productGrid = document.getElementById('productGrid');
     const categoryFilters = document.getElementById('category-filters');
@@ -23,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartDrawerItemsContainer = document.getElementById('cart-drawer-items');
     const drawerSubtotalEl = document.getElementById('drawer-subtotal');
     const pageTitle = document.querySelector('.section-title');
+    const masterProductContainer = document.getElementById('master-product-container');
+    const collectionProductContainer = document.getElementById('collection-product-container');
 
     // --- CART LOGIC ---
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -60,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addToCart = (productId) => { 
-        const product = window.products.find(p => p.id === productId); 
+        const allProducts = [masterProduct, ...products.watches, ...products.bracelets, ...products.necklaces];
+        const product = allProducts.find(p => p.id === productId); 
         if (!product) return; 
         const existingItem = cart.find(item => item.id === productId); 
         if (existingItem) { 
@@ -116,6 +104,48 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- PRODUCT DISPLAY LOGIC ---
+    const displayMasterProduct = () => {
+        if (!masterProductContainer) return;
+        const product = masterProduct;
+        masterProductContainer.innerHTML = `
+            <div class="master-product-image">
+                <img src="${product.image}" alt="${product.name}">
+            </div>
+            <div class="master-product-info">
+                <h2>${product.name}</h2>
+                <p>${product.description}</p>
+                <p class="price">PKR ${product.price.toLocaleString()}</p>
+                <button class="btn-add-to-cart" data-id="${product.id}">Add to Cart</button>
+            </div>
+        `;
+    };
+
+    const displayCollectionProducts = () => {
+        if (!collectionProductContainer) return;
+        collectionProductContainer.innerHTML = '';
+        const collectionProducts = [
+            products.watches[0],
+            products.bracelets[0],
+            products.necklaces[0]
+        ];
+        collectionProducts.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <a href="product.html?id=${product.id}"><img src="${product.image}" alt="${product.name}"></a>
+                <div class="product-info">
+                    <div>
+                        <a href="product.html?id=${product.id}" style="text-decoration:none;color:inherit;">
+                            <h4>${product.name}</h4>
+                            <p class="price">PKR ${product.price.toLocaleString()}</p>
+                        </a>
+                    </div>
+                    <button class="btn-add-to-cart" data-id="${product.id}">Add to Cart</button>
+                </div>`;
+            collectionProductContainer.appendChild(card);
+        });
+    };
+
     const displayProducts = (productsToDisplay) => {
         if (!productGrid) return;
         productGrid.innerHTML = '';
@@ -141,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const displayCategories = (activeCat) => {
         if (!categoryFilters) return;
-        const categories = ['All', ...new Set(window.products.map(p => p.category))];
+        const categories = ['All', ...Object.keys(products)];
         categoryFilters.innerHTML = categories.map(cat => `<button class="category-btn ${cat === activeCat ? 'active' : ''}" data-category="${cat}">${cat}</button>`).join('');
     };
 
@@ -152,7 +182,8 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.addEventListener('keyup', (e) => {
             const searchTerm = e.target.value.toLowerCase();
             if (productGrid) {
-                const filteredProducts = window.products.filter(p => p.name.toLowerCase().includes(searchTerm));
+                const allProducts = [...products.watches, ...products.bracelets, ...products.necklaces];
+                const filteredProducts = allProducts.filter(p => p.name.toLowerCase().includes(searchTerm));
                 displayProducts(filteredProducts);
                 if (categoryFilters) categoryFilters.style.display = searchTerm ? 'none' : 'flex';
                 if (pageTitle) pageTitle.textContent = searchTerm ? `Search Results for "${searchTerm}"` : 'Explore Our Products';
@@ -173,12 +204,14 @@ document.addEventListener('DOMContentLoaded', () => {
             pageTitle.textContent = `${initialCategory}`;
         }
         
-        let productsToDisplay = window.products;
+        const allProducts = (typeof products !== 'undefined') ? [...(products.watches || []), ...(products.bracelets || []), ...(products.necklaces || [])] : [];
+
+        let productsToDisplay = allProducts;
         if (searchTerm) {
-            productsToDisplay = window.products.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
+            productsToDisplay = allProducts.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
             if (pageTitle) pageTitle.textContent = `Search Results for "${searchTerm}"`;
         } else if (initialCategory !== 'All') {
-            productsToDisplay = window.products.filter(p => p.category === initialCategory);
+            productsToDisplay = allProducts.filter(p => p.category === initialCategory);
         }
 
         if (productGrid) {
@@ -188,64 +221,55 @@ document.addEventListener('DOMContentLoaded', () => {
             displayCategories(initialCategory);
         }
         
-        // --- GLOBAL EVENT LISTENERS ---
-        if (productGrid) {
-            productGrid.addEventListener('click', (e) => { 
-                if (e.target.classList.contains('btn-add-to-cart')) { 
-                    const productId = parseInt(e.target.dataset.id, 10); 
-                    addToCart(productId); 
-                } 
-            });
+        if (masterProductContainer) {
+            displayMasterProduct();
         }
+        if (collectionProductContainer) {
+            displayCollectionProducts();
+        }
+        
+        // --- GLOBAL EVENT LISTENERS ---
+        document.body.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-add-to-cart')) {
+                const productId = parseInt(e.target.dataset.id, 10);
+                addToCart(productId);
+            }
+        });
+
         if (categoryFilters) {
             categoryFilters.addEventListener('click', (e) => {
                 if (e.target.tagName === 'BUTTON') {
                     const selectedCategory = e.target.dataset.category;
-                    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-                    e.target.classList.add('active');
-                    const productsToDisplay = selectedCategory === 'All' ? window.products : window.products.filter(p => p.category === selectedCategory);
-                    displayProducts(productsToDisplay);
-                    if (pageTitle) pageTitle.textContent = selectedCategory === 'All' ? 'Explore Our Products' : selectedCategory;
+                    window.location.href = `products.html?category=${selectedCategory}`;
                 }
             });
         }
-        if (cartDrawerItemsContainer) {
-            cartDrawerItemsContainer.addEventListener('click', e => { 
-                if (e.target.classList.contains('drawer-item-remove')) { 
-                    const productId = parseInt(e.target.dataset.id, 10); 
-                    removeFromCart(productId); 
-                } 
-            });
-        }
+
         if(closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
         if(cartDrawerOverlay) cartDrawerOverlay.addEventListener('click', closeDrawer);
+
+        if (cartDrawerItemsContainer) {
+            cartDrawerItemsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('drawer-item-remove')) {
+                    const productId = parseInt(e.target.dataset.id, 10);
+                    removeFromCart(productId);
+                }
+            });
+        }
     }
 
-    // --- SLIDER LOGIC ---
-    function initSlider() {
-        const slider = document.querySelector('.fade-slider-container');
-        if (!slider) return;
-        const slides = slider.querySelectorAll('img');
-        if (slides.length === 0) return;
-        
-        let currentSlide = 0;
-        slides[currentSlide].classList.add('active');
-        
-        setInterval(() => {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }, 5000);
+    // --- HEADER INITIALIZATION ---
+    if (document.getElementById('site-header-placeholder')) {
+        document.addEventListener('headerLoaded', () => {
+            window.setupHeader();
+            window.setupSearch();
+            initPage();
+        });
+    } else {
+        window.setupHeader();
+        window.setupSearch();
+        initPage();
     }
-
-    // --- RUN INITIALIZATION ---
-    document.addEventListener('headerLoaded', () => {
-        setupHeader();
-        setupSearch();
-    });
-
-    initPage();
-    initSlider();
 });
 
 // Dark Mode Toggle
