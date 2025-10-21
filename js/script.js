@@ -1,7 +1,5 @@
 // js/script.js
 
-// Replace everything in js/script.js with this
-
 document.addEventListener('DOMContentLoaded', () => {
     // --- MASTER PRODUCT DATA (NOW WITH CATEGORIES) ---
     const products = [
@@ -245,3 +243,26 @@ document.addEventListener('DOMContentLoaded', () => {
     displayProducts(products);
     updateCartUI();
 });
+
+// Slider functionality
+function initializeSlider() {
+    const sliderImages = document.querySelectorAll('.fade-slider-container img');
+    let currentSlide = 0;
+
+    function showNextSlide() {
+        // Remove active class from current slide
+        sliderImages[currentSlide].classList.remove('active');
+        
+        // Move to next slide
+        currentSlide = (currentSlide + 1) % sliderImages.length;
+        
+        // Add active class to new slide
+        sliderImages[currentSlide].classList.add('active');
+    }
+
+    // Start the automatic slideshow
+    setInterval(showNextSlide, 3000); // Change slide every 3 seconds
+}
+
+// Initialize slider when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeSlider);
