@@ -14,7 +14,24 @@
     <script src="js/script.js" defer></script>
 </head>
 <body>
-    <div id="site-header-placeholder"></div>
+    <header class="header">
+  <div class="container">
+    <a href="index.html" class="logo">
+      <img src="img/logo/logo.png" alt="MN Store">
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About Us</a>
+    </nav>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search products...">
+    </div>
+    <div class="header-icons" id="headerIcons">
+      <!-- Icons will be dynamically inserted by script.js -->
+    </div>
+  </div>
+</header>
 
     <main class="container">
         <div class="fade-slider-container">
@@ -74,36 +91,7 @@
         </div>
     </div>
 
-    <div id="site-footer-placeholder"></div>
-
- <script>
-['header','footer'].forEach(name=>{
-  const el = document.getElementById('site-'+name+'-placeholder');
-
-  // --- Detect offline (when opened directly from file://) ---
-  if (location.protocol === 'file:') {
-    // Insert header/footer manually when offline
-    if (name === 'header') {
-      el.innerHTML = `
-<header class="header">
-  <div class="container">
-    <a href="index.html" class="logo">
-      <img src="img/logo/logo.png" alt="MN Store">
-    </a>
-    <nav class="main-nav">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About Us</a>
-    </nav>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search products...">
-    </div>
-    <div class="header-icons" id="headerIcons"></div>
-  </div>
-</header>`;
-    } else if (name === 'footer') {
-      el.innerHTML = `
-<footer class="footer">
+ <footer class="footer">
   <div class="container">
     <div>
       <h4>About MN Store</h4>
@@ -122,26 +110,7 @@
       <a href="#">Twitter</a>
     </div>
   </div>
-</footer>`;
-    }
-  } 
-  else {
-    // --- Online mode (GitHub/domain) ---
-    fetch('partials/' + name + '.html')
-      .then(r => { if(!r.ok) throw new Error('Not found'); return r.text(); })
-      .then(html => {
-        if (el) {
-          el.innerHTML = html;
-          if (name === 'header') {
-            const event = new Event('headerLoaded');
-            document.dispatchEvent(event);
-          }
-        }
-      })
-      .catch(err => console.warn('Could not load partial:', name, err));
-  }
-});
-</script>
+</footer>
 
 </body>
 </html>

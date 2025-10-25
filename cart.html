@@ -61,18 +61,23 @@
 </head>
 <body>
     <header class="header">
-        <div class="container">
-            <a href="index.html" class="logo">Moiz's Store</a>
-            <nav class="main-nav">
-                <a href="index.html">Home</a>
-                <a href="about.html">About Us</a>
-            </nav>
-            <div class="header-icons">
-                 <a href="signup.html" title="My Account">&#128100;</a>
-                 <a href="cart.html" title="Shopping Cart">&#128722;</a>
-            </div>
-        </div>
-    </header>
+  <div class="container">
+    <a href="index.html" class="logo">
+      <img src="img/logo/logo.png" alt="MN Store">
+    </a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About Us</a>
+    </nav>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search products...">
+    </div>
+    <div class="header-icons" id="headerIcons">
+      <!-- Icons will be dynamically inserted by script.js -->
+    </div>
+  </div>
+</header>
 
     <main class="container cart-page">
         <h2>Your Shopping Cart</h2>
@@ -80,13 +85,26 @@
             </div>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div><h4>About Moiz's Store</h4><p>Your one-stop shop for the latest trends in Gujranwala. We are committed to providing the best products and services.</p></div>
-            <div><h4>Quick Links</h4><a href="index.html">Home</a><a href="about.html">About Us</a></div>
-            <div><h4>Follow Us</h4><div class="social-media"><a href="#">FB</a> <a href="#">IG</a> <a href="#">TW</a></div></div>
-        </div>
-    </footer>
+<footer class="footer">
+  <div class="container">
+    <div>
+      <h4>About MN Store</h4>
+      <p>Your one-stop shop for the latest trends in Gujranwala. We are committed to providing the best products and services.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="products.html">All Products</a>
+      <a href="about.html">About Us</a>
+    </div>
+    <div>
+      <h4>Follow Us</h4>
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+    </div>
+  </div>
+</footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
