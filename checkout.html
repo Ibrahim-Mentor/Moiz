@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - MN Store</title>
+    <link rel="icon" type="image/png" href="img/logo/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional styles specific to checkout page */
+        .checkout-page { padding: 60px 0; }
+        .checkout-page h2 { text-align: center; margin-bottom: 40px; }
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .checkout-form-container, .order-summary-container {
+            background-color: var(--secondary-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+        }
+         .order-summary-container h3 {
+             margin-top: 0;
+             margin-bottom: 20px;
+             padding-bottom: 10px;
+             border-bottom: 1px solid var(--border-color);
+         }
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+         .order-summary-item:last-of-type {
+             border-bottom: none;
+             padding-bottom: 0;
+             margin-bottom: 0;
+         }
+        .order-summary-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 10px; }
+        .order-summary-details { flex-grow: 1; }
+        .order-summary-details span { display: block; }
+        .order-summary-details span:last-child { font-size: 0.8em; color: #aaa; }
+        .order-summary-price { font-weight: 600; }
+
+        .summary-totals { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--accent-color); }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .summary-row.total { font-size: 1.2rem; font-weight: 700; color: var(--accent-color); margin-top: 10px; }
+
+        @media (max-width: 768px) {
+            .checkout-container { grid-template-columns: 1fr; }
+            .order-summary-container { margin-top: 30px; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="loader-wrapper">
+        <div class="loader-circle"></div>
+    </div>
+    <div class="custom-cursor"></div>
+
+    <header class="header">
+      <div class="container">
+        <a href="index.html" class="logo">
+          <img src="img/logo/logo.png" alt="MN Store">
+        </a>
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About Us</a>
+        </nav>
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search products...">
+        </div>
+        <div class="header-icons" id="headerIcons">
+          </div>
+      </div>
+    </header>
+
+    <main class="container checkout-page">
+        <h2>Checkout</h2>
+        <div class="checkout-container">
+            <div class="checkout-form-container">
+                <h3>Shipping Information</h3>
+                <form id="checkoutForm">
+                    <div class="input-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="phone">Phone Number (WhatsApp)</label>
+                        <input type="tel" id="phone" required placeholder="e.g., 03001234567">
+                    </div>
+                     <div class="input-group">
+                        <label for="address">Full Address</label>
+                        <textarea id="address" rows="3" required placeholder="Street Address, Area, City"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Payment Method</label>
+                        <p>Cash on Delivery (Pay when you receive the order)</p>
+                    </div>
+                    <button type="submit" class="form-btn">Place Order on WhatsApp</button>
+                    <p id="form-message" class="form-message"></p>
+                </form>
+            </div>
+
+            <div class="order-summary-container">
+                <h3>Order Summary</h3>
+                <div id="orderSummaryItems">
+                    <p>Loading your cart...</p>
+                </div>
+                <div class="summary-totals">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="summarySubtotal">PKR 0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span id="summaryShipping">PKR 0</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="summaryTotal">PKR 0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div>
+          <h4>About MN Store</h4>
+          <p>Your one-stop shop for the latest trends in Gujranwala. We are committed to providing the best products and services.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="products.html">All Products</a>
+          <a href="about.html">About Us</a>
+        </div>
+        <div>
+          <h4>Follow Us</h4>
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/data/products.js"></script> <script src="js/script.js"></script> <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderSummaryItemsEl = document.getElementById('orderSummaryItems');
+            const summarySubtotalEl = document.getElementById('summarySubtotal');
+            const summaryShippingEl = document.getElementById('summaryShipping');
+            const summaryTotalEl = document.getElementById('summaryTotal');
+            const checkoutForm = document.getElementById('checkoutForm');
+            const formMessageEl = document.getElementById('form-message');
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const shippingCost = 250; // Set your shipping cost here
+
+            // Redirect if cart is empty
+            if (cart.length === 0) {
+                 window.location.href = 'cart.html'; // Or index.html
+                 return; // Stop further execution
+            }
+
+            const renderOrderSummary = () => {
+                orderSummaryItemsEl.innerHTML = ''; // Clear loading message
+                if (cart.length === 0) {
+                     orderSummaryItemsEl.innerHTML = '<p>Your cart is empty.</p>';
+                     summarySubtotalEl.textContent = 'PKR 0';
+                     summaryShippingEl.textContent = 'PKR 0';
+                     summaryTotalEl.textContent = 'PKR 0';
+                     return;
+                }
+
+                let subtotal = 0;
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'order-summary-item';
+                    itemEl.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="order-summary-details">
+                            <span>${item.name}</span>
+                            <span>Qty: ${item.quantity}</span>
+                        </div>
+                        <div class="order-summary-price">PKR ${itemTotal.toLocaleString()}</div>
+                    `;
+                    orderSummaryItemsEl.appendChild(itemEl);
+                });
+
+                const total = subtotal + shippingCost;
+                summarySubtotalEl.textContent = `PKR ${subtotal.toLocaleString()}`;
+                summaryShippingEl.textContent = `PKR ${shippingCost.toLocaleString()}`;
+                summaryTotalEl.textContent = `PKR ${total.toLocaleString()}`;
+            };
+
+            checkoutForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                formMessageEl.textContent = ''; // Clear previous messages
+
+                // --- !!! IMPORTANT: REPLACE WITH YOUR WHATSAPP NUMBER !!! ---
+                const yourWhatsAppNumber = "923001234567"; // Use international format without '+' or '00'
+                // Example: If your number is +92 300 1234567, use "923001234567"
+
+                if (!yourWhatsAppNumber || yourWhatsAppNumber === "923001234567" || yourWhatsAppNumber.length < 10) {
+                    formMessageEl.textContent = 'WhatsApp number not configured by store owner.';
+                    formMessageEl.className = 'form-message error';
+                     console.error("Please configure your WhatsApp number in checkout.html script.");
+                    return;
+                }
+
+
+                const name = document.getElementById('name').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const address = document.getElementById('address').value.trim();
+
+                if (!name || !phone || !address) {
+                    formMessageEl.textContent = 'Please fill in all required fields.';
+                    formMessageEl.className = 'form-message error';
+                    return;
+                }
+
+                // Construct the message
+                let message = `*New Order from MN Store*\n\n`;
+                message += `*Customer Details:*\n`;
+                message += `Name: ${name}\n`;
+                message += `Phone: ${phone}\n`;
+                message += `Address: ${address}\n\n`;
+                message += `*Order Items:*\n`;
+
+                let orderSubtotal = 0;
+                cart.forEach(item => {
+                    message += `- ${item.name} (Qty: ${item.quantity}) - PKR ${(item.price * item.quantity).toLocaleString()}\n`;
+                    orderSubtotal += item.price * item.quantity;
+                });
+
+                const orderTotal = orderSubtotal + shippingCost;
+                message += `\nSubtotal: PKR ${orderSubtotal.toLocaleString()}`;
+                message += `\nShipping: PKR ${shippingCost.toLocaleString()}`;
+                message += `\n*Total: PKR ${orderTotal.toLocaleString()}*`;
+                message += `\n\nPayment Method: Cash on Delivery`;
+
+                // Encode the message for URL
+                const encodedMessage = encodeURIComponent(message);
+
+                // Create WhatsApp URL
+                const whatsappUrl = `https://wa.me/${yourWhatsAppNumber}?text=${encodedMessage}`;
+
+                // Redirect to WhatsApp
+                window.location.href = whatsappUrl;
+
+                 // Optional: Clear cart after sending to WhatsApp
+                 // localStorage.removeItem('cart');
+                 // You might want to show a success message before clearing/redirecting
+                 // or redirect to a "Thank You" page first.
+            });
+
+            // Initial render of the summary
+            renderOrderSummary();
+        });
+    </script>
+
+</body>
+</html>
