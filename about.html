@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - MN Store</title> {/* Updated Title */}
+    <title>About Us - MN Store</title> {/* Updated title */}
     <link rel="icon" type="image/png" href="img/logo/logo.png"> {/* Corrected icon path */}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css"> {/* Link to main stylesheet */}
+    {/* Removed js/data/products.js include as it's not strictly needed unless loading products */}
+    <script src="js/script.js" defer></script> {/* Keep main script for header/footer/etc */}
 
     <style>
         /* --- ABOUT PAGE SPECIFIC STYLES (Updated for Dark Theme) --- */
@@ -64,7 +66,7 @@
             line-height: 1.7;
         }
 
-        .store-image { /* Renamed class */
+        .team-image { /* Keep this style for the image */
              width: 100%;
              max-width: 700px;
              border-radius: 15px;
@@ -72,16 +74,7 @@
              margin-top: 40px;
              border: 1px solid var(--border-color); /* Add border */
         }
-
-        /* --- Styles for Featured Products Section --- */
-        .featured-products-section {
-            padding: 60px 0;
-            border-top: 1px solid var(--border-color); /* Separator */
-            margin-top: 60px;
-        }
-
-         /* Using product-grid styles from style.css for consistency */
-
+         /* Removed featured product styles as they belong in style.css or specific JS */
     </style>
 </head>
 <body>
@@ -114,7 +107,7 @@
                 Welcome to MN Store! Born from a passion for quality and style, we started as a small idea right here in Gujranwala. Our goal was simple: to create a one-stop shop where our community could find the latest trends in watches, accessories, and more without compromising on quality or service.
             </p>
 
-            <img src="img/watch/watch7.png" alt="MN Store Products Showcase" class="store-image">
+            <img src="img/watch/watch7.png" alt="MN Store Products Showcase" class="team-image">
 
             <div class="values-grid">
                 <div class="value-card">
@@ -132,12 +125,6 @@
             </div>
         </section>
 
-        <section class="featured-products-section">
-            <h2 class="section-title">Featured Products</h2>
-            <div id="featured-product-grid" class="product-grid">
-                <p style="text-align: center; color: var(--text-color);">Loading products...</p>
-            </div>
-        </section>
         </main>
 
     <footer class="footer">
@@ -160,5 +147,5 @@
         </div>
       </div>
     </footer>
-</body>
+    </body>
 </html>
