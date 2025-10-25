@@ -3,58 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Moiz's Store</title>
-    <link rel="icon" type="image/png" href="logo.png">
+    <title>About Us - MN Store</title> {/* Updated Title */}
+    <link rel="icon" type="image/png" href="img/logo/logo.png"> {/* Corrected icon path */}
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script src="js/data/products.js"></script>
-    <script src="js/script.js" defer></script>
-    <style>
-        :root {
-            --primary-color: #fff;
-            --secondary-color: #f4f6f8;
-            --accent-color: #007bff;
-            --text-color: #343a40;
-            --heading-color: #212529;
-            --border-color: #dee2e6;
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, .07);
-        }
-        * { box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--secondary-color); color: var(--text-color); }
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
-        
-        /* --- HEADER & FOOTER (Copied from other pages for consistency) --- */
-        .header { background-color: var(--primary-color); padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, .05); }
-        .header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.8rem; font-weight: 700; color: var(--heading-color); text-decoration: none; }
-        .main-nav a { font-weight: 600; color: var(--text-color); text-decoration: none; margin: 0 15px; transition: color .3s; }
-        .main-nav a:hover, .main-nav a.active { color: var(--accent-color); }
-        .header-icons { display: flex; align-items: center; }
-        .header-icons a { margin-left: 20px; color: var(--heading-color); text-decoration: none; font-size: 1.5rem; }
-        .footer { background-color: #2c3e50; color: #bdc3c7; padding: 40px 0; margin-top: 50px; }
-        .footer .container { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 30px; }
-        .footer h4 { color: #fff; } .footer p { line-height: 1.8; }
-        .footer a { color: #bdc3c7; text-decoration: none; display: block; margin-bottom: 8px; transition: color .3s ease; }
-        .footer a:hover { color: var(--accent-color); }
+    <link rel="stylesheet" href="style.css"> {/* Link to main stylesheet */}
 
-        /* --- ABOUT PAGE SPECIFIC STYLES --- */
+    <style>
+        /* --- ABOUT PAGE SPECIFIC STYLES (Updated for Dark Theme) --- */
         .about-section {
             padding: 60px 0;
             text-align: center;
         }
         .about-section h1 {
             font-size: 2.8rem;
-            color: var(--heading-color);
+            color: var(--heading-color); /* Use theme variable */
             margin-bottom: 20px;
         }
         .about-section .lead {
-            font-size: 1.2rem;
+            font-size: 1.1rem; /* Slightly smaller */
             max-width: 800px;
             margin: 0 auto 40px;
             line-height: 1.8;
-            color: #555;
+            color: var(--text-color); /* Use theme variable */
         }
-        
+
         .values-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -64,24 +36,26 @@
         }
 
         .value-card {
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color); /* Use theme variable */
             padding: 30px;
             border-radius: 10px;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--card-shadow); /* Use theme variable */
             transition: transform .3s ease, box-shadow .3s ease;
+            border: 1px solid var(--border-color); /* Add border */
+            color: var(--text-color); /* Ensure text color */
         }
-        
+
         .value-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, .1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .2); /* Darker shadow on hover */
         }
-        
+
         .value-card h3 {
             font-size: 1.5rem;
-            color: var(--heading-color);
+            color: var(--heading-color); /* Use theme variable */
             margin-top: 0;
             margin-bottom: 15px;
-            border-bottom: 2px solid var(--accent-color);
+            border-bottom: 2px solid var(--accent-color); /* Use theme variable */
             padding-bottom: 10px;
             display: inline-block;
         }
@@ -89,50 +63,58 @@
         .value-card p {
             line-height: 1.7;
         }
-        
-        .team-image {
+
+        .store-image { /* Renamed class */
              width: 100%;
              max-width: 700px;
              border-radius: 15px;
              box-shadow: var(--card-shadow);
              margin-top: 40px;
+             border: 1px solid var(--border-color); /* Add border */
         }
+
+        /* --- Styles for Featured Products Section --- */
+        .featured-products-section {
+            padding: 60px 0;
+            border-top: 1px solid var(--border-color); /* Separator */
+            margin-top: 60px;
+        }
+
+         /* Using product-grid styles from style.css for consistency */
 
     </style>
 </head>
 <body>
-    <header class="header">
-      <div class="loader-wrapper">
+    <div class="loader-wrapper">
         <div class="loader-circle"></div>
     </div>
-
     <div class="custom-cursor"></div>
-  <div class="container">
-    <a href="index.html" class="logo">
-      <img src="img/logo/logo.png" alt="MN Store">
-    </a>
-    <nav class="main-nav">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About Us</a>
-    </nav>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search products...">
-    </div>
-    <div class="header-icons" id="headerIcons">
-      <!-- Icons will be dynamically inserted by script.js -->
-    </div>
-  </div>
-</header>
 
+    <header class="header">
+      <div class="container">
+        <a href="index.html" class="logo">
+          <img src="img/logo/logo.png" alt="MN Store">
+        </a>
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About Us</a>
+        </nav>
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search products...">
+        </div>
+        <div class="header-icons" id="headerIcons">
+          </div>
+      </div>
+    </header>
     <main class="container">
         <section class="about-section">
             <h1>Our Story</h1>
             <p class="lead">
-                Welcome to Moiz's Store! Born from a passion for quality and style, we started as a small idea right here in Gujranwala. Our goal was simple: to create a one-stop shop where our community could find the latest trends in fashion, electronics, and home goods without compromising on quality or service.
+                Welcome to MN Store! Born from a passion for quality and style, we started as a small idea right here in Gujranwala. Our goal was simple: to create a one-stop shop where our community could find the latest trends in watches, accessories, and more without compromising on quality or service.
             </p>
-            
-            <img src="https://via.placeholder.com/700x400" alt="Moiz's Store Team or Office" class="team-image">
+
+            <img src="img/watch/watch7.png" alt="MN Store Products Showcase" class="store-image">
 
             <div class="values-grid">
                 <div class="value-card">
@@ -149,27 +131,34 @@
                 </div>
             </div>
         </section>
-    </main>
+
+        <section class="featured-products-section">
+            <h2 class="section-title">Featured Products</h2>
+            <div id="featured-product-grid" class="product-grid">
+                <p style="text-align: center; color: var(--text-color);">Loading products...</p>
+            </div>
+        </section>
+        </main>
 
     <footer class="footer">
-  <div class="container">
-    <div>
-      <h4>About MN Store</h4>
-      <p>Your one-stop shop for the latest trends in Gujranwala. We are committed to providing the best products and services.</p>
-    </div>
-    <div>
-      <h4>Quick Links</h4>
-      <a href="index.html">Home</a>
-      <a href="products.html">All Products</a>
-      <a href="about.html">About Us</a>
-    </div>
-    <div>
-      <h4>Follow Us</h4>
-      <a href="#">Facebook</a>
-      <a href="#">Instagram</a>
-      <a href="#">Twitter</a>
-    </div>
-  </div>
-</footer>
+      <div class="container">
+        <div>
+          <h4>About MN Store</h4>
+          <p>Your one-stop shop for the latest trends in Gujranwala. We are committed to providing the best products and services.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="products.html">All Products</a>
+          <a href="about.html">About Us</a>
+        </div>
+        <div>
+          <h4>Follow Us</h4>
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+    </footer>
 </body>
 </html>
