@@ -17,12 +17,22 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 9, name: "Woven Leather Band", price: 1800, image: "img/bracelet/bracelet2.jpg", rating: 5, category: 'Bracelets' },
         { id: 10, name: "Beaded Stone Bracelet", price: 2100, image: "img/bracelet/bracelet3.jpg", rating: 4, category: 'Bracelets' },
         { id: 11, name: "Engraved Steel Cuff", price: 4200, image: "img/bracelet/bracelet4.jpg", rating: 5, category: 'Bracelets' },
+        { id: 12, name: "Silver Link Bracelet", price: 3500, image: "img/bracelet/bracelet1.png", rating: 4, category: 'Bracelets' },
+        { id: 14, name: "Woven Leather Band", price: 1800, image: "img/bracelet/bracelet2.png", rating: 5, category: 'Bracelets' },
+        { id: 15, name: "Beaded Stone Bracelet", price: 2100, image: "img/bracelet/bracelet3.png", rating: 4, category: 'Bracelets' },
+        { id: 16, name: "Engraved Steel Cuff", price: 4200, image: "img/bracelet/bracelet4.png", rating: 5, category: 'Bracelets' },
 
         // Wallets (keeping them here for filtering)
         { id: 12, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet1.png", rating: 5, category: 'Wallets' },
         { id: 13, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet2.png", rating: 4, category: 'Wallets' },
         { id: 12, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet3.png", rating: 5, category: 'Wallets' },
         { id: 13, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet4.png", rating: 4, category: 'Wallets' },
+        { id: 14, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet5.png", rating: 5, category: 'Wallets' },
+        { id: 15, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet6.png", rating: 4, category: 'Wallets' },
+
+        // Necklaces (keeping them here for filtering)
+        { id: 14, name: "Gold Pendant Necklace", price: 4500, image: "img/necklace/necklace1.png", rating: 5, category: 'Necklaces' },
+        { id: 15, name: "Silver Choker", price: 3200, image: "img/necklace/necklace2.png", rating: 4, category: 'Necklaces' },
     ];
 
     // --- (The rest of this script is the standard site-wide logic) ---
