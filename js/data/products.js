@@ -35,3 +35,12 @@ const products = {
     { id: 28, name: "Crystal Flower Pearl Necklace", price: 3200, image: "img/neckles/S8152a7bd6c824e0d986abf4212804e850.webp", rating: 4, description: "A classic gold chain featuring a crystal flower and pearl charm." } // Update price/desc
   ]
 };
+
+// Define masterProduct (Optional, select one product ID to feature)
+const masterProduct = {
+  id: 6,
+  name: "Steel Blue Chronograph", // Matches ID 6 name
+  price: 17500,               // Matches ID 6 price
+  image: "img/watch/watch6.png", // Matches ID 6 image
+  description: "A robust steel chronograph with a captivating blue sunray dial." // Matches ID 6 description
+};
