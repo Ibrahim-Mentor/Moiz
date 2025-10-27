@@ -3,35 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Moiz's Store</title>
-    <link rel="icon" type="image/png" href="logo.png">
+    <title>Sign Up - MN Store</title> 
+    <link rel="icon" type="image/png" href="img/logo/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="js/script.js" defer></script> 
 </head>
 <body>
   <div class="loader-wrapper">
         <div class="loader-circle"></div>
     </div>
-
     <div class="custom-cursor"></div>
+
     <header class="header">
-  <div class="container">
-    <a href="index.html" class="logo">
-      <img src="img/logo/logo.png" alt="MN Store">
-    </a>
-    <nav class="main-nav">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About Us</a>
-    </nav>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search products...">
-    </div>
-    <div class="header-icons" id="headerIcons">
-      <!-- Icons will be dynamically inserted by script.js -->
-    </div>
-  </div>
-</header>
+      <div class="container">
+        <a href="index.html" class="logo">
+          <img src="img/logo/logo.png" alt="MN Store">
+        </a>
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About Us</a>
+        </nav>
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search products...">
+        </div>
+        <div class="header-icons" id="headerIcons">
+          </div>
+      </div>
+    </header>
 
     <main class="main-content">
         <div class="form-container">
@@ -50,72 +50,69 @@
                     <input type="password" id="password" required>
                 </div>
                 <button type="submit" class="form-btn">Sign Up</button>
-                <p id="form-message"></p>
+                <p id="form-message" class="form-message"></p>
             </form>
             <p class="form-switch-link">Already have an account? <a href="login.html">Login</a></p>
         </div>
     </main>
 
     <footer class="footer">
-  <div class="container">
-    <div>
-      <h4>About MN Store</h4>
-      <p>Your one-stop shop for the latest trends in Gujranwala. We are committed to providing the best products and services.</p>
-    </div>
-    <div>
-      <h4>Quick Links</h4>
-      <a href="index.html">Home</a>
-      <a href="products.html">All Products</a>
-      <a href="about.html">About Us</a>
-    </div>
-    <div>
-      <h4>Follow Us</h4>
-      <a href="#">Facebook</a>
-      <a href="#">Instagram</a>
-      <a href="#">Twitter</a>
-    </div>
-  </div>
-</footer>
+      <div class="container">
+        <div>
+          <h4>About MN Store</h4>
+          <p>Your one-stop shop for the latest trends in Gujranwala. We are committed to providing the best products and services.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="products.html">All Products</a>
+          <a href="about.html">About Us</a>
+        </div>
+        <div>
+          <h4>Follow Us</h4>
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+    </footer>
 
     <script>
-
+        // Signup specific JS remains the same
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim().toLowerCase();
             const password = document.getElementById('password').value;
-            const messageEl = document.getElementById('form-message');
+            const messageEl = document.getElementById('form-message'); // Ensure this P tag has class="form-message"
+
+            messageEl.textContent = ''; // Clear previous messages
 
             if (!name || !email || !password) {
                 messageEl.textContent = 'All fields are required.';
-                messageEl.className = 'form-message error';
+                messageEl.className = 'form-message error'; // Add error class
                 return;
             }
             if (password.length < 6) {
                 messageEl.textContent = 'Password must be at least 6 characters.';
-                messageEl.className = 'form-message error';
+                messageEl.className = 'form-message error'; // Add error class
                 return;
             }
 
-            // Get existing users from localStorage or initialize an empty array
             const users = JSON.parse(localStorage.getItem('usersDB')) || [];
-            
-            // Check if user already exists
+
             if (users.find(user => user.email === email)) {
                 messageEl.textContent = 'An account with this email already exists.';
-                messageEl.className = 'form-message error';
+                messageEl.className = 'form-message error'; // Add error class
                 return;
             }
 
-            // Add new user
-            const newUser = { name, email, password, profileImg: '' }; // profileImg is empty initially
+            const newUser = { name, email, password, profileImg: '' };
             users.push(newUser);
-            
-            // Save updated users array back to localStorage
             localStorage.setItem('usersDB', JSON.stringify(users));
 
             messageEl.textContent = 'Account created successfully! Redirecting to login...';
-            messageEl.className = 'form-message success';
+            messageEl.className = 'form-message success'; // Add success class
 
             setTimeout(() => {
                 window.location.href = 'login.html';
