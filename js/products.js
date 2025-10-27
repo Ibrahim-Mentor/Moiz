@@ -23,16 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 16, name: "Engraved Steel Cuff", price: 4200, image: "img/bracelet/bracelet4.png", rating: 5, category: 'Bracelets' },
 
         // Wallets (keeping them here for filtering)
-        { id: 12, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet1.png", rating: 5, category: 'Wallets' }, // Duplicate ID 12
-        { id: 13, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet2.png", rating: 4, category: 'Wallets' }, // Duplicate ID 13
-        { id: 12, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet3.png", rating: 5, category: 'Wallets' }, // Duplicate ID 12
-        { id: 13, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet4.png", rating: 4, category: 'Wallets' }, // Duplicate ID 13
-        { id: 14, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet5.png", rating: 5, category: 'Wallets' }, // Duplicate ID 14
-        { id: 15, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet6.png", rating: 4, category: 'Wallets' }, // Duplicate ID 15
+        { id: 17, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet1.png", rating: 5, category: 'Wallets' }, // Duplicate ID 12
+        { id: 18, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet2.png", rating: 4, category: 'Wallets' }, // Duplicate ID 13
+        { id: 19, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet3.png", rating: 5, category: 'Wallets' }, // Duplicate ID 12
+        { id: 20, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet4.png", rating: 4, category: 'Wallets' }, // Duplicate ID 13
+        { id: 21, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet5.png", rating: 5, category: 'Wallets' }, // Duplicate ID 14
+        { id: 22, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet6.png", rating: 4, category: 'Wallets' }, // Duplicate ID 15
 
         // Necklaces (keeping them here for filtering)
-        { id: 14, name: "Gold Pendant Necklace", price: 4500, image: "img/necklace/necklace1.png", rating: 5, category: 'Necklaces' }, // Duplicate ID 14
-        { id: 15, name: "Silver Choker", price: 3200, image: "img/necklace/necklace2.png", rating: 4, category: 'Necklaces' }, // Duplicate ID 15
+        { id: 23, name: "Gold Pendant Necklace", price: 4500, image: "img/necklace/necklace1.png", rating: 5, category: 'Necklaces' }, // Duplicate ID 14
+        { id: 24, name: "Silver Choker", price: 3200, image: "img/necklace/necklace2.png", rating: 4, category: 'Necklaces' }, // Duplicate ID 15
     ];
 
     // --- (The rest of this script is the standard site-wide logic) ---

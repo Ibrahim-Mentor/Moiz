@@ -17,22 +17,22 @@ const products = {
     { id: 9, name: "Obsidian Snowflake Bracelet", price: 1800, image: "img/bracelet/bracelet2.jpg", rating: 5, description: "Striking obsidian snowflake bead bracelet with a decorative silver bead." }, // .jpg version - Update price/desc
     { id: 10, name: "Kids Charm Bracelet Set", price: 2100, image: "img/bracelet/bracelet3.jpg", rating: 4, description: "Fun and colorful beaded bracelets perfect for kids." }, // .jpg version - Update price/desc
     { id: 11, name: "Gemstone Moonstone Bracelet", price: 4200, image: "img/bracelet/bracelet4.jpg", rating: 5, description: "Beautiful moonstone bead bracelet featuring colorful gemstone accents." }, // .jpg version - Update price/desc
-    { id: 17, name: "Woven Leather Bracelet", price: 3500, image: "img/bracelet/bracelet1.png", rating: 4, description: "Stylish brown woven leather bracelet with a steel clasp." }, // .png version - Update price/desc
-    { id: 18, name: "Diamond Accent Bracelet", price: 1800, image: "img/bracelet/bracelet2.png", rating: 5, description: "Delicate gold-tone bracelet with a sparkling diamond accent centerpiece." }, // .png version - Update price/desc
-    { id: 19, name: "Crystal Circle Bracelet", price: 2100, image: "img/bracelet/bracelet3.png", rating: 4, description: "Elegant gold-tone bangle featuring a crystal-studded circle." }, // .png version - Update price/desc
-    { id: 20, name: "Solitaire Diamond Chain", price: 4200, image: "img/bracelet/bracelet4.png", rating: 5, description: "A simple yet stunning gold chain bracelet with a single solitaire diamond." }  // .png version - Update price/desc
+    { id: 12, name: "Woven Leather Bracelet", price: 3500, image: "img/bracelet/bracelet1.png", rating: 4, description: "Stylish brown woven leather bracelet with a steel clasp." }, // .png version - Update price/desc
+    { id: 13, name: "Diamond Accent Bracelet", price: 1800, image: "img/bracelet/bracelet2.png", rating: 5, description: "Delicate gold-tone bracelet with a sparkling diamond accent centerpiece." }, // .png version - Update price/desc
+    { id: 14, name: "Crystal Circle Bracelet", price: 2100, image: "img/bracelet/bracelet3.png", rating: 4, description: "Elegant gold-tone bangle featuring a crystal-studded circle." }, // .png version - Update price/desc
+    { id: 15, name: "Solitaire Diamond Chain", price: 4200, image: "img/bracelet/bracelet4.png", rating: 5, description: "A simple yet stunning gold chain bracelet with a single solitaire diamond." }  // .png version - Update price/desc
   ],
   wallets: [
-    { id: 21, name: "Classic Tan Bifold Wallet", price: 2200, image: "img/wallet/wallet1.png", rating: 5, description: "A timeless tan leather bifold wallet with contrast stitching." }, // Update price/desc
-    { id: 22, name: "Carbon Fiber Cardholder", price: 2800, image: "img/wallet/wallet2.png", rating: 4, description: "Minimalist and sleek carbon fiber cardholder for your essential cards." }, // Update price/desc
-    { id: 23, name: "Brown Leather Bifold", price: 2200, image: "img/wallet/wallet3.png", rating: 5, description: "Keep your cards and cash organized in this classic brown leather bifold." }, // Update price/desc
-    { id: 24, name: "Canvas & Leather Travel Wallet", price: 2800, image: "img/wallet/wallet4.png", rating: 4, description: "A rugged canvas and leather wallet, perfect for travel documents and currency." }, // Update price/desc
-    { id: 25, name: "Smart Bifold Wallet", price: 2200, image: "img/wallet/wallet5.png", rating: 5, description: "A modern smart wallet with indicator light, blending tech and style." }, // Update price/desc
-    { id: 26, name: "Red Zipper Clutch Wallet", price: 2800, image: "img/wallet/wallet6.png", rating: 4, description: "Secure your essentials in style with this elegant red zipper clutch." }  // Update price/desc
+    { id: 16, name: "Classic Tan Bifold Wallet", price: 2200, image: "img/wallet/wallet1.png", rating: 5, description: "A timeless tan leather bifold wallet with contrast stitching." }, // Update price/desc
+    { id: 17, name: "Carbon Fiber Cardholder", price: 2800, image: "img/wallet/wallet2.png", rating: 4, description: "Minimalist and sleek carbon fiber cardholder for your essential cards." }, // Update price/desc
+    { id: 18, name: "Brown Leather Bifold", price: 2200, image: "img/wallet/wallet3.png", rating: 5, description: "Keep your cards and cash organized in this classic brown leather bifold." }, // Update price/desc
+    { id: 19, name: "Canvas & Leather Travel Wallet", price: 2800, image: "img/wallet/wallet4.png", rating: 4, description: "A rugged canvas and leather wallet, perfect for travel documents and currency." }, // Update price/desc
+    { id: 20, name: "Smart Bifold Wallet", price: 2200, image: "img/wallet/wallet5.png", rating: 5, description: "A modern smart wallet with indicator light, blending tech and style." }, // Update price/desc
+    { id: 21, name: "Red Zipper Clutch Wallet", price: 2800, image: "img/wallet/wallet6.png", rating: 4, description: "Secure your essentials in style with this elegant red zipper clutch." }  // Update price/desc
   ],
   necklaces: [
-    { id: 27, name: "Pearl Drop Pendant", price: 4500, image: "img/neckles/images.jpg", rating: 5, description: "An exquisite pearl drop pendant with crystal accents." }, // Update price/desc
-    { id: 28, name: "Crystal Flower Pearl Necklace", price: 3200, image: "img/neckles/S8152a7bd6c824e0d986abf4212804e850.webp", rating: 4, description: "A classic gold chain featuring a crystal flower and pearl charm." } // Update price/desc
+    { id: 22, name: "Pearl Drop Pendant", price: 4500, image: "img/neckles/images.jpg", rating: 5, description: "An exquisite pearl drop pendant with crystal accents." }, // Update price/desc
+    { id: 23, name: "Crystal Flower Pearl Necklace", price: 3200, image: "img/neckles/S8152a7bd6c824e0d986abf4212804e850.webp", rating: 4, description: "A classic gold chain featuring a crystal flower and pearl charm." } // Update price/desc
   ]
 };
 
