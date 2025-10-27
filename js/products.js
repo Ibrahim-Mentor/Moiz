@@ -1,39 +1,6 @@
 // js/products.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- MASTER PRODUCT DATA (Using your local images) ---
-    const products = [
-        // Watches
-        { id: 1, name: "Classic Chronograph", price: 12500, image: "img/watch/watch1.png", rating: 5, category: 'Watches' },
-        { id: 2, name: "Steel Dive Watch", price: 15999, image: "img/watch/watch2.png", rating: 5, category: 'Watches' },
-        { id: 3, name: "Minimalist Leather", price: 8999, image: "img/watch/watch3.png", rating: 4, category: 'Watches' },
-        { id: 4, name: "Digital Sport Watch", price: 7500, image: "img/watch/watch4.png", rating: 4, category: 'Watches' },
-        { id: 5, name: "Gold Dress Watch", price: 18500, image: "img/watch/watch5.png", rating: 5, category: 'Watches' },
-        { id: 6, name: "Vintage Field Watch", price: 9200, image: "img/watch/watch6.png", rating: 4, category: 'Watches' },
-        { id: 7, name: "Modern Smartwatch", price: 22000, image: "img/watch/watch7.png", rating: 5, category: 'Watches' },
-        
-        // Bracelets
-        { id: 8, name: "Silver Link Bracelet", price: 3500, image: "img/bracelet/bracelet1.jpg", rating: 4, category: 'Bracelets' },
-        { id: 9, name: "Woven Leather Band", price: 1800, image: "img/bracelet/bracelet2.jpg", rating: 5, category: 'Bracelets' },
-        { id: 10, name: "Beaded Stone Bracelet", price: 2100, image: "img/bracelet/bracelet3.jpg", rating: 4, category: 'Bracelets' },
-        { id: 11, name: "Engraved Steel Cuff", price: 4200, image: "img/bracelet/bracelet4.jpg", rating: 5, category: 'Bracelets' },
-        { id: 12, name: "Silver Link Bracelet", price: 3500, image: "img/bracelet/bracelet1.png", rating: 4, category: 'Bracelets' }, // Duplicate ID 12
-        { id: 14, name: "Woven Leather Band", price: 1800, image: "img/bracelet/bracelet2.png", rating: 5, category: 'Bracelets' }, // Duplicate ID 14
-        { id: 15, name: "Beaded Stone Bracelet", price: 2100, image: "img/bracelet/bracelet3.png", rating: 4, category: 'Bracelets' }, // Duplicate ID 15
-        { id: 16, name: "Engraved Steel Cuff", price: 4200, image: "img/bracelet/bracelet4.png", rating: 5, category: 'Bracelets' },
-
-        // Wallets (keeping them here for filtering)
-        { id: 17, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet1.png", rating: 5, category: 'Wallets' }, // Duplicate ID 12
-        { id: 18, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet2.png", rating: 4, category: 'Wallets' }, // Duplicate ID 13
-        { id: 19, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet3.png", rating: 5, category: 'Wallets' }, // Duplicate ID 12
-        { id: 20, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet4.png", rating: 4, category: 'Wallets' }, // Duplicate ID 13
-        { id: 21, name: "Leather Bifold Wallet", price: 2200, image: "img/wallet/wallet5.png", rating: 5, category: 'Wallets' }, // Duplicate ID 14
-        { id: 22, name: "Traveler's Wallet", price: 2800, image: "img/wallet/wallet6.png", rating: 4, category: 'Wallets' }, // Duplicate ID 15
-
-        // Necklaces (keeping them here for filtering)
-        { id: 23, name: "Gold Pendant Necklace", price: 4500, image: "img/necklace/necklace1.png", rating: 5, category: 'Necklaces' }, // Duplicate ID 14
-        { id: 24, name: "Silver Choker", price: 3200, image: "img/necklace/necklace2.png", rating: 4, category: 'Necklaces' }, // Duplicate ID 15
-    ];
 
     // --- (The rest of this script is the standard site-wide logic) ---
     const userIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>`;
