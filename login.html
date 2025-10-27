@@ -3,35 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Moiz's Store</title>
-    <link rel="icon" type="image/png" href="logo.png">
+    <title>Login - MN Store</title> 
+    <link rel="icon" type="image/png" href="img/logo/logo.png"> 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+   <link rel="icon" type="image/png" href="img/logo/logo.png">
+    <script src="js/script.js" defer></script> 
 </head>
 <body>
   <div class="loader-wrapper">
         <div class="loader-circle"></div>
     </div>
-
     <div class="custom-cursor"></div>
+
     <header class="header">
-  <div class="container">
-    <a href="index.html" class="logo">
-      <img src="img/logo/logo.png" alt="MN Store">
-    </a>
-    <nav class="main-nav">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About Us</a>
-    </nav>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search products...">
-    </div>
-    <div class="header-icons" id="headerIcons">
-      <!-- Icons will be dynamically inserted by script.js -->
-    </div>
-  </div>
-</header>
+      <div class="container">
+        <a href="index.html" class="logo">
+          <img src="img/logo/logo.png" alt="MN Store">
+        </a>
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About Us</a>
+        </nav>
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search products...">
+        </div>
+        <div class="header-icons" id="headerIcons">
+          </div>
+      </div>
+    </header>
 
     <main class="main-content">
         <div class="form-container">
@@ -52,30 +53,29 @@
         </div>
     </main>
 
-<footer class="footer">
-  <div class="container">
-    <div>
-      <h4>About MN Store</h4>
-      <p>Your one-stop shop for the latest trends in Gujranwala. We are committed to providing the best products and services.</p>
-    </div>
-    <div>
-      <h4>Quick Links</h4>
-      <a href="index.html">Home</a>
-      <a href="products.html">All Products</a>
-      <a href="about.html">About Us</a>
-    </div>
-    <div>
-      <h4>Follow Us</h4>
-      <a href="#">Facebook</a>
-      <a href="#">Instagram</a>
-      <a href="#">Twitter</a>
-    </div>
-  </div>
-</footer>
+    <footer class="footer">
+      <div class="container">
+        <div>
+          <h4>About MN Store</h4>
+          <p>Your one-stop shop for the latest trends in Gujranwala. We are committed to providing the best products and services.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="products.html">All Products</a>
+          <a href="about.html">About Us</a>
+        </div>
+        <div>
+          <h4>Follow Us</h4>
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+    </footer>
 
     <script>
-       
-
+        // Login specific JS remains the same
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('email').value.trim().toLowerCase();
@@ -83,21 +83,15 @@
             const messageEl = document.getElementById('form-message');
 
             const users = JSON.parse(localStorage.getItem('usersDB')) || [];
-            
+
             const user = users.find(u => u.email === email && u.password === password);
 
             if (user) {
-                // Login successful
-                // Save the current user's info to localStorage to be used across pages
                 localStorage.setItem('currentUser', JSON.stringify(user));
-                
-                // Check for a redirect URL, otherwise go to index
                 const urlParams = new URLSearchParams(window.location.search);
                 const redirectUrl = urlParams.get('redirect') || 'index.html';
                 window.location.href = redirectUrl;
-
             } else {
-                // Login failed
                 messageEl.textContent = 'Invalid email or password.';
                 messageEl.className = 'form-message error';
             }

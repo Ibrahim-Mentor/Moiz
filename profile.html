@@ -3,34 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Settings - Moiz's Store</title>
-    <link rel="icon" type="image/png" href="logo.png">
+    <title>Profile Settings - MN Store</title> 
+    <link rel="icon" type="image/png" href="img/logo/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
   <div class="loader-wrapper">
         <div class="loader-circle"></div>
     </div>
-
     <div class="custom-cursor"></div>
+
     <header class="header">
-  <div class="container">
-    <a href="index.html" class="logo">
-      <img src="img/logo/logo.png" alt="MN Store">
-    </a>
-    <nav class="main-nav">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About Us</a>
-    </nav>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Search products...">
-    </div>
-    <div class="header-icons" id="headerIcons">
-    </div>
-  </div>
-</header>
+      <div class="container">
+        <a href="index.html" class="logo">
+          <img src="img/logo/logo.png" alt="MN Store">
+        </a>
+        <nav class="main-nav">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About Us</a>
+        </nav>
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Search products...">
+        </div>
+        <div class="header-icons" id="headerIcons">
+            </div>
+      </div>
+    </header>
 
     <main class="main-content">
         <div class="profile-container">
@@ -45,6 +46,11 @@
                     <label for="name">Full Name</label>
                     <input type="text" id="name" required>
                 </div>
+                {/* Add email display (read-only) if desired */}
+                <div class="input-group">
+                    <label for="profileEmail">Email Address</label>
+                    <input type="email" id="profileEmail" readonly disabled style="background-color: var(--primary-color); cursor: not-allowed;">
+                </div>
                 <button type="submit" class="form-btn">Save Changes</button>
                 <p id="form-message" class="form-message"></p>
             </form>
@@ -52,84 +58,82 @@
         </div>
     </main>
 
- <footer class="footer">
-  <div class="container">
-    <div>
-      <h4>About MN Store</h4>
-      <p>Your one-stop shop for the latest trends in Gujranwala. We are committed to providing the best products and services.</p>
-    </div>
-    <div>
-      <h4>Quick Links</h4>
-      <a href="index.html">Home</a>
-      <a href="products.html">All Products</a>
-      <a href="about.html">About Us</a>
-    </div>
-    <div>
-      <h4>Follow Us</h4>
-      <a href="#">Facebook</a>
-      <a href="#">Instagram</a>
-      <a href="#">Twitter</a>
-    </div>
-  </div>
-</footer>
+     <footer class="footer">
+      <div class="container">
+        <div>
+          <h4>About MN Store</h4>
+          <p>Your one-stop shop for the latest trends in Gujranwala. We are committed to providing the best products and services.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="products.html">All Products</a>
+          <a href="about.html">About Us</a>
+        </div>
+        <div>
+          <h4>Follow Us</h4>
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+    </footer>
 
-    <script src="js/script.js" defer></script>
+    <script src="js/script.js" defer></script> {/* Load main script first for header */}
     <script>
-
+        // Profile specific JS (slightly modified to show email)
         document.addEventListener('DOMContentLoaded', () => {
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-            // Auth Guard: If no user is logged in, redirect to login page
             if (!currentUser) {
-                window.location.href = 'login.html';
+                window.location.href = 'login.html?redirect=profile.html'; // Redirect back after login
                 return;
             }
 
             const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('profileEmail'); // Get email input
             const profilePicPreview = document.getElementById('profile-pic-preview');
             const profilePicInput = document.getElementById('profile-pic-input');
             const profileForm = document.getElementById('profileForm');
             const logoutBtn = document.getElementById('logoutBtn');
             const messageEl = document.getElementById('form-message');
 
-            // --- Populate page with current user data ---
+            // Populate page
             nameInput.value = currentUser.name;
-            profilePicPreview.src = currentUser.profileImg || `https://via.placeholder.com/150/007bff/FFFFFF?text=${currentUser.name.charAt(0)}`;
-            
-            // --- Event Listener for image preview ---
+            emailInput.value = currentUser.email; // Display email
+            profilePicPreview.src = currentUser.profileImg || `https://via.placeholder.com/150/d4af37/1a1a1a?text=${currentUser.name.charAt(0)}`; // Dark theme placeholder
+
+            // Image preview logic remains the same...
             let newProfileImgSrc = currentUser.profileImg;
             profilePicInput.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        newProfileImgSrc = event.target.result;
-                        profilePicPreview.src = newProfileImgSrc;
-                    }
-                    reader.readAsDataURL(file);
-                }
+               const file = e.target.files[0];
+               if (file) {
+                   const reader = new FileReader();
+                   reader.onload = function(event) {
+                       newProfileImgSrc = event.target.result;
+                       profilePicPreview.src = newProfileImgSrc;
+                   }
+                   reader.readAsDataURL(file);
+               }
             });
 
-            // --- Event Listener for saving changes ---
+            // Save changes logic remains the same...
             profileForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const newName = nameInput.value.trim();
-                
+
                 if (!newName) {
                     messageEl.textContent = 'Name cannot be empty.';
                     messageEl.className = 'form-message error';
                     setTimeout(() => messageEl.textContent = '', 3000);
                     return;
                 }
-                
-                // Update the currentUser object
+
                 currentUser.name = newName;
                 currentUser.profileImg = newProfileImgSrc;
-                
-                // Save updated currentUser back to localStorage
+
                 localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
-                // IMPORTANT: Also update the master users database
                 let users = JSON.parse(localStorage.getItem('usersDB')) || [];
                 const userIndex = users.findIndex(u => u.email === currentUser.email);
                 if (userIndex !== -1) {
@@ -141,11 +145,11 @@
                 messageEl.className = 'form-message success';
                 setTimeout(() => {
                     messageEl.textContent = '';
-                    window.location.reload(); // Reload to show updated name in header
-                }, 2000);
+                    window.location.reload();
+                }, 1500); // Shorter delay
             });
 
-            // --- Event Listener for logout ---
+            // Logout logic remains the same...
             logoutBtn.addEventListener('click', () => {
                 localStorage.removeItem('currentUser');
                 window.location.href = 'index.html';
