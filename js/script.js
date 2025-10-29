@@ -1,7 +1,7 @@
-/* --- NEW: Consolidated DOMContentLoaded Listener --- */
+/* --- Consolidated DOMContentLoaded Listener --- */
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- NEW: Loader Logic ---
+    // --- Loader Logic ---
     const loaderWrapper = document.querySelector('.loader-wrapper');
     window.addEventListener('load', () => {
         if (loaderWrapper) {
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- NEW: Custom Cursor Logic ---
+    // --- Custom Cursor Logic ---
     const cursor = document.querySelector('.custom-cursor');
     if (cursor) {
         document.addEventListener('mousemove', e => {
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cursor.style.top = e.clientY + 'px';
         });
 
-        document.querySelectorAll('a, button, input[type="submit"], .category-btn, .close-drawer-btn, .drawer-item-remove, .change-pic-label, label[for]').forEach(el => {
+        document.querySelectorAll('a, button, input[type="submit"], .category-btn, .close-drawer-btn, .drawer-item-remove, .change-pic-label, label[for], .theme-toggle-btn').forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursor.style.width = '30px';
                 cursor.style.height = '30px';
@@ -36,6 +36,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- SVG Icons ---
     const userIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px;"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>`;
     const cartIconSVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px;"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>`;
+    // --- NEW: Theme Toggle Icons ---
+    const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-6.364-.386 1.591-1.591M3 12H.75m.386-6.364 1.591 1.591M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /></svg>`;
+    const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px;"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>`;
+
+    // --- NEW: Theme Toggle Logic ---
+    const body = document.body;
+
+    // Function to apply theme
+    const applyTheme = (theme) => {
+        const themeToggleBtn = document.getElementById('theme-toggle-btn'); // Find button *after* it's created
+        if (theme === 'light') {
+            body.classList.add('light-theme');
+            if (themeToggleBtn) themeToggleBtn.innerHTML = moonIcon; // Show moon icon in light mode
+        } else {
+            body.classList.remove('light-theme');
+            if (themeToggleBtn) themeToggleBtn.innerHTML = sunIcon; // Show sun icon in dark mode
+        }
+    };
+
+    // Check saved theme on load
+    const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
+    applyTheme(savedTheme);
 
 
     // --- DOM ELEMENTS ---
@@ -77,8 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!badge) {
                 badge = document.createElement('span');
                 badge.id = 'cart-count-badge';
-                // Style badge directly or via CSS
-                cartLink.style.position = 'relative'; // Ensure parent is relative for absolute positioning
+                cartLink.style.position = 'relative'; 
                 cartLink.appendChild(badge);
             }
             badge.textContent = totalItems;
@@ -92,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Products data is not loaded.');
             return;
         }
-        // Combine all product sources
         const allProductSources = [masterProduct];
         for (const category in products) {
             if (Array.isArray(products[category])) {
@@ -100,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        const product = allProductSources.find(p => p && p.id === productId); // Added check for p
+        const product = allProductSources.find(p => p && p.id === productId); 
         if (!product) {
             console.error(`Product with ID ${productId} not found.`);
             return;
@@ -146,23 +166,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="${profileImgSrc}" alt="Profile">
                     <span>${currentUser.name.split(' ')[0]}</span>
                 </a>
-                <a href="#" id="cart-link" title="Shopping Cart">${cartIconSVG}</a>`; // Use SVG
+                <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Theme"></button>
+                <a href="#" id="cart-link" title="Shopping Cart">${cartIconSVG}</a>`;
         } else {
             headerIcons.innerHTML = `
-                <a href="login.html" title="My Account">${userIconSVG}</a> <a href="#" id="cart-link" title="Shopping Cart">${cartIconSVG}</a>`; // Use SVG
+                <a href="login.html" title="My Account">${userIconSVG}</a>
+                <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Theme"></button>
+                <a href="#" id="cart-link" title="Shopping Cart">${cartIconSVG}</a>`;
         }
         const cartLink = document.getElementById('cart-link');
         if (cartLink) {
             cartLink.addEventListener('click', (e) => { e.preventDefault(); openDrawer(); });
         }
         updateCartUI(); // Update cart count badge immediately
+        applyTheme(localStorage.getItem('theme') || 'dark'); // Re-apply theme to set icon
     };
 
 
     // --- PRODUCT DISPLAY LOGIC ---
     const displayMasterProduct = () => {
-        // This function seems specific to index.html, might not be needed globally
-        // Check if the container exists before proceeding
         if (!masterProductContainer || typeof masterProduct === 'undefined') return;
         const product = masterProduct;
         masterProductContainer.innerHTML = `
@@ -179,15 +201,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const displayCollectionProducts = () => {
-        // Specific to index.html
         if (!collectionProductContainer || typeof products === 'undefined') return;
         collectionProductContainer.innerHTML = '';
         const collectionProducts = [
-            products.watches?.[0], // Use optional chaining
+            products.watches?.[0], 
             products.bracelets?.[0],
             products.necklaces?.[0],
             products.wallets?.[0]
-        ].filter(p => p); // Filter out undefined
+        ].filter(p => p); 
 
         collectionProducts.forEach(product => {
             const card = document.createElement('div');
@@ -208,15 +229,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const displayProducts = (productsToDisplay) => {
-        // Specific to products.html and index.html (collection)
-        if (!productGrid && !collectionProductContainer) return; // Check both possible grids
-
-        const grid = productGrid || collectionProductContainer; // Use the one that exists
-         if (!grid) return; // Exit if neither grid is found on the current page
+        if (!productGrid && !collectionProductContainer) return; 
+        const grid = productGrid || collectionProductContainer; 
+         if (!grid) return; 
 
         grid.innerHTML = '';
         productsToDisplay.forEach(product => {
-             if (!product) return; // Skip if product is undefined
+             if (!product) return; 
             const card = document.createElement('div');
             card.className = 'product-card';
             let starsHTML = Array(5).fill(0).map((_, i) => i < (product.rating || 4) ? '★' : '☆').join('');
@@ -238,7 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const displayCategories = (activeCat) => {
-        // Specific to products.html
         if (!categoryFilters || typeof products === 'undefined') return;
         const categories = ['All', ...Object.keys(products)];
         const categoryMap = {
@@ -256,21 +274,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!searchInput) return;
         searchInput.addEventListener('keyup', (e) => {
             const searchTerm = e.target.value.toLowerCase();
-            // This search logic might need adjustment if it should only run on products.html
-            if (productGrid && typeof products !== 'undefined') { // Check if on a page with productGrid
+            if (productGrid && typeof products !== 'undefined') { 
                  const allProductSources = [];
                  for (const category in products) {
                      if (Array.isArray(products[category])) {
                          allProductSources.push(...products[category]);
                      }
                  }
-                const filteredProducts = allProductSources.filter(p => p && p.name.toLowerCase().includes(searchTerm)); // Added check for p
-                displayProducts(filteredProducts); // Display results in the main grid
+                const filteredProducts = allProductSources.filter(p => p && p.name.toLowerCase().includes(searchTerm)); 
+                displayProducts(filteredProducts); 
                 if (categoryFilters) categoryFilters.style.display = searchTerm ? 'none' : 'flex';
-                if (pageTitle && window.location.pathname.includes('products.html')) { // Only update title on products page
-                     pageTitle.textContent = searchTerm ? `Search Results for "${searchTerm}"` : 'All Products'; // Changed default
+                if (pageTitle && window.location.pathname.includes('products.html')) { 
+                     pageTitle.textContent = searchTerm ? `Search Results for "${searchTerm}"` : 'All Products'; 
                 }
-            } else if (e.key === 'Enter' && searchTerm.trim() !== '') { // Redirect from other pages on Enter
+            } else if (e.key === 'Enter' && searchTerm.trim() !== '') { 
                 window.location.href = `products.html?search=${encodeURIComponent(searchTerm)}`;
             }
         });
@@ -279,7 +296,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- PAGE INITIALIZATION ---
     function initPageSpecificContent() {
-         // Check if product data is loaded before proceeding
         if (typeof products === 'undefined' || typeof masterProduct === 'undefined') {
             console.log('Product data not ready for page init, retrying...');
             setTimeout(initPageSpecificContent, 100);
@@ -289,14 +305,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const pathname = window.location.pathname;
         const urlParams = new URLSearchParams(window.location.search);
 
-        // --- Index Page Specific ---
         if (pathname.endsWith('/') || pathname.endsWith('index.html')) {
-            // displayMasterProduct(); // If you have a master product section
-            displayCollectionProducts(); // Display featured products
-            initSlider(); // Initialize slider only on index page
+            displayCollectionProducts(); 
+            initSlider(); 
         }
-
-        // --- Products Page Specific ---
         else if (pathname.endsWith('products.html')) {
             const initialCategory = urlParams.get('category') || 'All';
             const searchTerm = urlParams.get('search');
@@ -307,28 +319,26 @@ document.addEventListener('DOMContentLoaded', () => {
                  }
              }
 
-            let productsToDisplay = allProductSources.filter(p => p); // Filter out potential undefined entries
+            let productsToDisplay = allProductSources.filter(p => p); 
 
             if (searchTerm) {
                 productsToDisplay = productsToDisplay.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
                 if (pageTitle) pageTitle.textContent = `Search Results for "${searchTerm}"`;
-                if (categoryFilters) categoryFilters.style.display = 'none'; // Hide filters during search
+                if (categoryFilters) categoryFilters.style.display = 'none'; 
             } else if (initialCategory !== 'All' && products[initialCategory.toLowerCase()]) {
-                productsToDisplay = products[initialCategory.toLowerCase()].filter(p => p); // Filter specific category
+                productsToDisplay = products[initialCategory.toLowerCase()].filter(p => p); 
                 if (pageTitle) pageTitle.textContent = initialCategory;
             } else {
-                 if (pageTitle) pageTitle.textContent = 'All Products'; // Default title
+                 if (pageTitle) pageTitle.textContent = 'All Products'; 
             }
-
 
             if (productGrid) {
                 displayProducts(productsToDisplay);
             }
-            if (categoryFilters && !searchTerm) { // Only display if not searching
+            if (categoryFilters && !searchTerm) { 
                 displayCategories(initialCategory);
             }
         }
-        // Add other page-specific initializations here if needed (e.g., cart.html, product.html)
     }
 
     // --- GLOBAL EVENT LISTENERS ---
@@ -339,17 +349,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    if (categoryFilters) { // Event listener only needed on pages with filters
+    if (categoryFilters) { 
         categoryFilters.addEventListener('click', (e) => {
             if (e.target.tagName === 'BUTTON') {
                 const selectedCategory = e.target.dataset.category;
                 const url = new URL(window.location);
                 url.searchParams.set('category', selectedCategory);
-                url.searchParams.delete('search'); // Remove search term when clicking category
+                url.searchParams.delete('search'); 
                 window.history.pushState({}, '', url);
-
-                // Re-initialize product display for the new category
-                initPageSpecificContent(); // Re-run the logic to display products
+                initPageSpecificContent(); 
             }
         });
     }
@@ -369,19 +377,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- INITIALIZE COMMON ELEMENTS ---
     window.setupHeader();
     window.setupSearch();
-    initPageSpecificContent(); // Run page-specific logic
+    initPageSpecificContent(); 
+
+    // --- NEW: Theme Toggle Click Listener (run AFTER header is built) ---
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            let newTheme;
+            if (document.body.classList.contains('light-theme')) {
+                newTheme = 'dark';
+            } else {
+                newTheme = 'light';
+            }
+            localStorage.setItem('theme', newTheme);
+            applyTheme(newTheme); // applyTheme will update the icon
+        });
+    }
 
 });
 
-/* --- Image Slider Function (Keep outside DOMContentLoaded if called early) --- */
+/* --- Image Slider Function --- */
 function initSlider() {
     const slides = document.querySelectorAll('.fade-slider-container img');
-    if (!slides || slides.length === 0) return; // Added null check
+    if (!slides || slides.length === 0) return; 
 
     let currentSlide = 0;
 
     function showSlide(index) {
-         if (index < 0 || index >= slides.length) return; // Boundary check
+         if (index < 0 || index >= slides.length) return; 
         slides.forEach((slide, i) => {
             if (i === index) {
                 slide.classList.add('active');
@@ -395,11 +418,9 @@ function initSlider() {
         currentSlide = (currentSlide + 1) % slides.length;
         showSlide(currentSlide);
     }
-
-    // Show first slide only if slides exist
+    
     if (slides.length > 0) {
        showSlide(0);
-       // Auto advance slides
-       setInterval(nextSlide, 5000); // 5 seconds
+       setInterval(nextSlide, 5000); 
     }
 }
